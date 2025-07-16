@@ -45,7 +45,7 @@ if [ $TAR_EXIT_CODE -eq 0 ]; then
     echo "[$(date)] SUCCESS | File: $ARCHIVE_NAME | Size: $FILE_SIZE | Time: ${DURATION}s" >> "$LOG_FILE"
     echo " Backup created at $ARCHIVE_PATH"
 else
-    echo "[$(date)] ERROR | Backup failed (see $LOG_FILE)" >> "$LOG_FILE"
+    echo "[$(date)] ERROR | Backup failed (see $ERROR_LOG)" >> "$LOG_FILE"
     echo "Backup failed. Check $ERROR_LOG for details."
     exit 1
 fi
