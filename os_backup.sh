@@ -1,6 +1,6 @@
 #!/bin/bash
 
-
+LOG_FILE="backup.log"
 ERROR_LOG="error.log"
 
 read -p "Enter the path for backup: " search_path
@@ -35,3 +35,7 @@ ARCHIVE_PATH="$BACKUP_DIR/$ARCHIVE_NAME"
 START_TIME=$(date +%s)
 
 tar -czf "$ARCHIVE_PATH" -T "$CONFIG_FILE" 2>"$ERROR_LOG"
+TAR_EXIT_CODE=$?
+
+END_TIME=$(date +%s)
+DURATION=$((END_TIME - START_TIME))
