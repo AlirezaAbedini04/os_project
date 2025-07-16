@@ -14,6 +14,11 @@ config_file="backup.conf"
 
 find "$search_path" -type f -name "*.$file_ext" >> "$config_file"
 
+if [ ! -s "$CONFIG_FILE" ]; then
+    echo "No files with .$file_ext extension found in $search_path."
+    exit 1
+fi
+
 echo "List of .$file_ext files in $search_path has been saved to $config_file."
 
 read -p "Enter the destination directory for backups: " BACKUP_DIR
