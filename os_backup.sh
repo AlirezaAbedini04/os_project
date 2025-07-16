@@ -8,11 +8,14 @@ if [ ! -d "$search_path" ]; then
     exit 1
 fi
 
+read -p "Enter the destination directory for backups: " BACKUP_DIR
+
+mkdir -p "$BACKUP_DIR"
 
 config_file="backup.conf"
 > "$config_file"  
 
 
 find "$search_path" -type f -name "*.$file_ext" >> "$config_file"
-tar -czf "
+
 echo "List of .$file_ext files in $search_path has been saved to $config_file."
