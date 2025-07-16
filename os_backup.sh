@@ -1,5 +1,8 @@
 #!/bin/bash
 
+
+ERROR_LOG="error.log"
+
 read -p "Enter the path for backup: " search_path
 read -p "Enter the format of the files(txt, jpg,..: " file_ext
 
@@ -24,3 +27,11 @@ echo "List of .$file_ext files in $search_path has been saved to $config_file."
 read -p "Enter the destination directory for backups: " BACKUP_DIR
 
 mkdir -p "$BACKUP_DIR"
+
+TIMESTAMP=$(date +"%Y-%m-%d_%H-%M-%S")
+ARCHIVE_NAME="backup_$TIMESTAMP.tar.gz"
+ARCHIVE_PATH="$BACKUP_DIR/$ARCHIVE_NAME"
+
+START_TIME=$(date +%s)
+
+tar -czf "$ARCHIVE_PATH" -T "$CONFIG_FILE" 2>"$ERROR_LOG"
