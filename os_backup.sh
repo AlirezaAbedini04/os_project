@@ -39,3 +39,13 @@ TAR_EXIT_CODE=$?
 
 END_TIME=$(date +%s)
 DURATION=$((END_TIME - START_TIME))
+
+if [ $TAR_EXIT_CODE -eq 0 ]; then
+    FILE_SIZE=$(du -h "$ARCHIVE_PATH" | cut -f1)
+    echo "[$(date)] SUCCESS | File: $ARCHIVE_NAME | Size: $FILE_SIZE | Time: ${DURATION}s" >> "$LOG_FILE"
+    echo " Backup created at $ARCHIVE_PATH"
+else
+    echo "[$(date)] ERROR | Backup failed (see $LOG_FILE)" >> "$LOG_FILE"
+    echo "Backup failed. Check $ERROR_LOG for details."
+    exit 1
+fi
