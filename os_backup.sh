@@ -2,6 +2,7 @@
 
 LOG_FILE="backup.log"
 ERROR_LOG="error.log"
+RETENTION_DAYS=7
 
 read -p "Enter the path for backup: " search_path
 read -p "Enter the format of the files(txt, jpg,..: " file_ext
@@ -49,3 +50,9 @@ else
     echo "Backup failed. Check $ERROR_LOG for details."
     exit 1
 fi
+
+echo "Deleting backups older than $RETENTION_DAYS days in $BACKUP_DIR..."
+find "$BACKUP_DIR" -type f -name "backup_*.tar.gz" -mtime +$RETENTION_DAYS -exec rm -v {} \; >> "$LOG_FILE"
+echo "[$(date)]  Cleanup done: backups older than $RETENTION_DAYS days removed." >> "$LOG_FILE"
+
+echo "All done."
