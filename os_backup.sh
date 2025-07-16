@@ -14,6 +14,5 @@ config_file="backup.conf"
 
 
 find "$search_path" -type f -name "*.$file_ext" >> "$config_file"
-
-
+tar -czf "
 echo "List of .$file_ext files in $search_path has been saved to $config_file."
